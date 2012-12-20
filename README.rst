@@ -38,6 +38,7 @@ How use it?
 Urls files:
 
 .. code-block:: python
+
     from djsgettext.views import I18n
 
     urlpatterns = patterns('',
