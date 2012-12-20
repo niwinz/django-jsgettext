@@ -89,12 +89,14 @@ plural_simple_template = """
     var pluralidx function(count) { return (count == 1) ? 0 : 1; };
 """
 
+I18N_VIEW_CACHE_TIMEOUT = getattr(settings, 'I18N_VIEW_CACHE_TIMEOUT', 20)
+
 
 class I18n(View):
     domains = ['djsgettext', 'djangojs']
     packages = []
 
-    #@method_decorator(cache_page(60))
+    @method_decorator(cache_page(I18N_VIEW_CACHE_TIMEOUT))
     def dispatch(self, *args, **kwargs):
         return super(I18n, self).dispatch(*args, **kwargs)
 
