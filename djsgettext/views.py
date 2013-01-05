@@ -96,7 +96,7 @@ class I18n(View):
     domains = ['djsgettext', 'djangojs']
     packages = []
 
-    @method_decorator(cache_page(I18N_VIEW_CACHE_TIMEOUT))
+    #@method_decorator(cache_page(I18N_VIEW_CACHE_TIMEOUT))
     def dispatch(self, *args, **kwargs):
         return super(I18n, self).dispatch(*args, **kwargs)
 
@@ -187,7 +187,6 @@ class I18n(View):
         if not packages:
             packages = ['django.conf']
 
-        #import pdb; pdb.set_trace()
         paths = self.get_paths(packages)
         t = self.get_catalog(paths)
 
