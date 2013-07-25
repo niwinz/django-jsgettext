@@ -24,9 +24,11 @@ class Command(NoArgsCommand):
         make_option('--extension', '-e', dest='extensions',
             help='The file extension(s) to examine (default: "html,txt", or "js" if the domain is "djangojs"). Separate multiple extensions with commas, or use -e multiple times.',
             action='append'),
+
+        make_option('--ignore', '-i', action='append', dest='ignore_patterns',
+            default=[], metavar='PATTERN', help='Ignore files or directories matching this glob-style pattern. Use multiple times to ignore more.'),
     )
 
-    ignore_patterns = ['CVS', '.*', '*~']
     domain = 'djsgettext'
 
     def handle_noargs(self, *args, **options):
@@ -34,6 +36,10 @@ class Command(NoArgsCommand):
         process_all = options.get('all')
         extensions = options.get('extensions')
         verbosity = int(options.get('verbosity'))
+        ignore_patterns = options.get('ignore_patterns')
+        if options.get('use_default_ignore_patterns'):
+            ignore_patterns += ['CVS', '.*', '*~', '*.pyc']
+        self.ignore_patterns = list(set(ignore_patterns))
 
         if not extensions:
             extensions = ['html']
