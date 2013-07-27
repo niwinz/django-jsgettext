@@ -6,7 +6,7 @@ Improved and complement gettext support for javascript for Django
 
 setup(
     name = "django-jsgettext",
-    version = '0.4.1',
+    version = '0.5',
     url = 'https://github.com/niwibe/django-jsgettext',
     license = 'BSD',
     platforms = ['OS Independent'],
